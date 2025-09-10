@@ -1,2 +1,2 @@
-#Simple MC LifeSteal plugin
-##Version 1.21.8
+# Simple light-weight MC LifeSteal plugin
+## Version 1.21.8
