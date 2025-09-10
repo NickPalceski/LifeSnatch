@@ -1,0 +1,39 @@
+name: LifeSnatch
+version: '1.0'
+main: com.BopTart.lifeSnatch.LifeSnatch
+api-version: '1.21'
+
+author: BopTart
+description: Simple lifesteal plugin that allows players to steal hearts from other players through combat.
+
+commands:
+  lifesteal:
+    description: Main command for LifeSnatch plugin
+    usage: /<command> <reload|status>
+    permission: lifesnatch.admin
+  viewhearts:
+    description: View a player's heart count
+    usage: /<command> <player>
+    permission: lifesnatch.viewhearts
+  sethearts:
+    description: Set a player's heart count
+    usage: /<command> <player> <amount>
+    permission: lifesnatch.sethearts
+  withdrawhearts:
+    description: Withdraw some of your hearts into item form.
+    usage: /<command> <amount>
+    permission: lifesnatch.withdraw
+
+permissions:
+    lifesnatch.admin:
+        description: Allows access to the main LifeSnatch command.
+        default: op
+    lifesnatch.viewhearts:
+        description: Allows viewing of other players' heart counts.
+        default: true
+    lifesnatch.sethearts:
+        description: Allows setting of other players' heart counts.
+        default: op
+    lifesnatch.withdraw:
+        description: Allows players to withdraw their hearts into item form.
+        default: true
