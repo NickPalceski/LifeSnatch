@@ -19,46 +19,46 @@ public class WithdrawHeartsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§cSolo i giocatori possono usare questo comando!");
+            sender.sendMessage("§cOnly players can use this command!");
             return true;
         }
 
         Player player = (Player) sender;
 
         if (args.length != 1) {
-            player.sendMessage("§cUso corretto: /withdrawhearts <quantità>");
+            player.sendMessage("§cUsage: /withdrawhearts <amount>");
             return true;
         }
 
-        int amount;
+        double amount;
         try {
-            amount = Integer.parseInt(args[0]);
+            amount = Double.parseDouble(args[0]);
         } catch (NumberFormatException e) {
-            player.sendMessage("§cDevi inserire un numero valido!");
+            player.sendMessage("§cYou must enter a valid number!");
             return true;
         }
 
         if (amount <= 0) {
-            player.sendMessage("§cLa quantità deve essere maggiore di zero!");
+            player.sendMessage("§cThe amount must be greater than zero!");
             return true;
         }
 
-        int currentHearts = heartsManager.getHearts(player);
+        double currentHearts = heartsManager.getHearts(player);
 
         if (currentHearts <= amount) {
-            player.sendMessage("§cNon hai abbastanza cuori da ritirare!");
+            player.sendMessage("§cYou do not have enough hearts to withdraw!");
             return true;
         }
 
-        // Aggiorna i cuori del player
+        // Update player hearts
         heartsManager.setHearts(player, currentHearts - amount);
 
-        // Crea e dà i cuori speciali
+        // Give heart item(s) — since ItemStack amount must be int, round it
         ItemStack heartItem = Heart.createHeartItem();
-        heartItem.setAmount(amount);
+        heartItem.setAmount((int) Math.floor(amount)); // floors to nearest int
         player.getInventory().addItem(heartItem);
 
-        player.sendMessage("§ayou have got §c" + amount + " §ahearts/i!");
+        player.sendMessage("§aYou have withdrawn §c" + amount + " §aheart(s)!");
         return true;
     }
 }
