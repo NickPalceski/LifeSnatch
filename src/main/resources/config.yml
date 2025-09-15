@@ -1,10 +1,6 @@
 #General LifeSnatch Configuration
 
 
-
-#The number of health a player starts with when they first join the server
-startingHearts: 20.0   #Default 20 = 10 hearts in-game
-
 #The highest number of health a player can have
 maxHearts: 40.0     #Default 40 = 20 hearts in-game
 

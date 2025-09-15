@@ -27,7 +27,7 @@ public class Heart {
             meta.setLore(Arrays.asList("§7a Heart as been robbed"));
 
             // Glow tramite incanto nascosto
-            meta.addEnchant(Enchantment.DURABILITY, 1, true);
+            meta.addEnchant(Enchantment.UNBREAKING, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
             // Tag univoco NBT

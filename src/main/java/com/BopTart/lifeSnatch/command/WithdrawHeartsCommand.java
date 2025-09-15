@@ -1,5 +1,6 @@
 package com.BopTart.lifeSnatch.command;
 
+import com.BopTart.lifeSnatch.database.LifeSnatchDatabase;
 import com.BopTart.lifeSnatch.item.Heart;
 import com.BopTart.lifeSnatch.manager.HeartsManager;
 import org.bukkit.command.Command;
@@ -8,13 +9,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.sql.SQLException;
+
 public class WithdrawHeartsCommand implements CommandExecutor {
 
-    private final HeartsManager heartsManager;
-
-    public WithdrawHeartsCommand(HeartsManager heartsManager) {
-        this.heartsManager = heartsManager;
-    }
+    private final LifeSnatchDatabase db = LifeSnatchDatabase.getDatabase();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -43,7 +42,12 @@ public class WithdrawHeartsCommand implements CommandExecutor {
             return true;
         }
 
-        double currentHearts = heartsManager.getHearts(player);
+        double currentHearts = 0;
+        try {
+            currentHearts = db.getPlayerHearts(player);
+        } catch (SQLException e) {
+            System.err.println("Error getting player's hearts!" + e.getMessage());
+        }
 
         if (currentHearts <= amount) {
             player.sendMessage("§cYou do not have enough hearts to withdraw!");
@@ -51,7 +55,11 @@ public class WithdrawHeartsCommand implements CommandExecutor {
         }
 
         // Update player hearts
-        heartsManager.setHearts(player, currentHearts - amount);
+        try {
+            db.updatePlayerHearts(player, currentHearts - amount);
+        } catch (SQLException e) {
+            System.err.println("Error updating player's hearts!" + e.getMessage());
+        }
 
         // Give heart item(s) — since ItemStack amount must be int, round it
         ItemStack heartItem = Heart.createHeartItem();
