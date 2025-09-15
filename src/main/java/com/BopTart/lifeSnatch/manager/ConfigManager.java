@@ -19,9 +19,16 @@ public class ConfigManager {
     }
 
     public void loadConfig() {
+        makeDirectory();
         maxHearts = config.getDouble("maxHearts");
         heartGainLossAmount = config.getDouble("heartGainLossAmount");
         startingHearts = config.getDouble("startingHearts");
+    }
+
+    public void makeDirectory() {
+        if (!plugin.getDataFolder().exists()){
+            plugin.getDataFolder().mkdir();
+        }
     }
 
 
