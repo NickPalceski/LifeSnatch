@@ -6,6 +6,7 @@ import com.BopTart.lifeSnatch.command.WithdrawHeartsCommand;
 import com.BopTart.lifeSnatch.database.LifeSnatchDatabase;
 import com.BopTart.lifeSnatch.manager.ConfigManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import com.BopTart.lifeSnatch.item.Heart;
 
 import java.sql.SQLException;
 
@@ -32,6 +33,8 @@ public final class LifeSnatch extends JavaPlugin {
         getCommand("sethearts").setExecutor(new SetHeartsCommand());
         getCommand("viewhearts").setExecutor(new ViewHeartsCommand());
         getCommand("withdrawhearts").setExecutor(new WithdrawHeartsCommand());
+
+        getServer().addRecipe(Heart.heartRecipe());
     }
 
     @Override

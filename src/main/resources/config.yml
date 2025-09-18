@@ -7,5 +7,21 @@ maxHearts: 40.0     #Default 40 = 20 hearts in-game
 #The number of health a player gains/loses per kill/death
 heartGainLossAmount: 2.0   #Default 2 = 1 heart in-game
 
+# Custom heart item
+heartItem:
+  material: NETHER_STAR
+  name: "&c❤ Heart"
+  lore:
+    - "&7A fragment of life essence."
+    - "&7Use it to gain extra hearts."
 
-
+# Crafting recipe for heart item
+recipe:
+    enabled: true
+    ingredients:
+        G : GOLD_BLOCK
+        H : NETHER_STAR
+    shape:
+        - "GGG"
+        - "GHG"
+        - "GGG"
